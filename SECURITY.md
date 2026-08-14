@@ -23,5 +23,5 @@ Please do not share sensitive exploit details publicly.
 - Review package code before installing.
 - The sample extension uses a strict bash command allowlist with:
   - hard-blocked destructive patterns (e.g. `rm -rf`, `sudo`, `chmod 777`)
-  - confirm-required commands outside the allowlist
+  - confirm-required side-effectful commands (`node <script>`, `npm test/run/ci/install`, mutating `git` commands)
   - explicit `git diff` allowlist when used.

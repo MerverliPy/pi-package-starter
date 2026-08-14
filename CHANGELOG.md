@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Review fixes (v2.1.1):
+  - `--auto --dry-run` no longer publishes; it simulates bump + changelog + dry publish without commit/tag/publish.
+  - Tightened bash policy: `node` / `npm test|run|ci|install` / mutating `git` commands now require confirmation.
+  - Added edge-mode tests for `--auto --dry-run`, `--auto` without version, and node/npm/git policy decisions.
+
 - Executed v2.1 polish pass:
   - Added policy evaluator extraction with shared `extensions/policy.js` module.
   - Added test coverage for command policy decisions and release script behavior.

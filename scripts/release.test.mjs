@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { execSync } from "node:child_process";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 
 function run(command) {
   try {
@@ -15,6 +16,10 @@ function run(command) {
       output: `${error.stdout?.toString() ?? ""}${error.stderr?.toString() ?? ""}`,
     };
   }
+}
+
+function git(args) {
+  return execSync(`git ${args}`, { encoding: "utf8" }).trim();
 }
 
 const cases = [
@@ -40,6 +45,11 @@ const cases = [
     command: "./scripts/release.sh patch minor",
     code: 1,
   },
+  {
+    name: "auto requires version",
+    command: "./scripts/release.sh --auto",
+    code: 1,
+  },
 ];
 
 for (const testCase of cases) {
@@ -57,5 +67,45 @@ for (const testCase of cases) {
     );
   }
 }
+
+// --auto --dry-run must simulate the flow without publishing, without creating
+// git tags, and without leaving file mutations behind.
+const mutableFiles = ["package.json", "package-lock.json", "CHANGELOG.md"];
+const snapshots = new Map();
+for (const file of mutableFiles) {
+  if (existsSync(file)) {
+    snapshots.set(file, readFileSync(file, "utf8"));
+  }
+}
+const tagsBefore = git("tag --list");
+
+let autoDryRun;
+try {
+  autoDryRun = run("./scripts/release.sh --auto --dry-run patch");
+} finally {
+  for (const [file, content] of snapshots) {
+    writeFileSync(file, content);
+  }
+}
+
+assert.equal(
+  autoDryRun.code,
+  0,
+  `auto dry-run: expected exit 0, got ${autoDryRun.code}: ${autoDryRun.output}`,
+);
+assert.ok(
+  autoDryRun.output.includes("Auto release dry run completed"),
+  "auto dry-run should report completion",
+);
+assert.ok(
+  !autoDryRun.output.includes("Auto release completed for"),
+  "auto dry-run must not run the real publish path",
+);
+assert.equal(git("tag --list"), tagsBefore, "auto dry-run must not create git tags");
+assert.equal(
+  readFileSync("package.json", "utf8"),
+  snapshots.get("package.json"),
+  "auto dry-run must restore package.json",
+);
 
 console.log("release script tests passed");

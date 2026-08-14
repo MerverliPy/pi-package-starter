@@ -61,6 +61,9 @@ npm test
 # fully automated release flow: bump + changelog + commit + tag + publish
 ./scripts/release.sh 0.2.0 --note "Release notes" --auto
 
+# simulate the full auto flow without committing, tagging, or publishing
+./scripts/release.sh 0.2.1 --note "Release notes" --auto --dry-run
+
 # same as above but also push branch + tag
 ./scripts/release.sh 0.2.0 --note "Release notes" --auto --push
 ```

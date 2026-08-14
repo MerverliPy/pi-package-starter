@@ -12,12 +12,14 @@ Examples:
   ./scripts/release.sh patch --note "Fix prompt formatting" --publish
   ./scripts/release.sh 0.2.0 --note "Security policy upgrade" --auto
   ./scripts/release.sh 0.2.1 --note "Hotfix" --auto --push --publish
+  ./scripts/release.sh 0.2.2 --note "Hotfix" --auto --dry-run
 
 Version can be:
   patch | minor | major | x.y.z
 
 Notes:
-  --auto performs: validate -> optional version bump -> optional changelog update -> commit -> tag -> publish.
+  --auto performs: validate -> version bump -> optional changelog update -> commit -> tag -> publish.
+  --auto --dry-run simulates the full auto flow (bump + changelog + npm dry publish) but does NOT commit, tag, or publish.
   --push pushes the current branch + created tag after auto-release.
   --publish publishes to npm.
 EOF
@@ -143,18 +145,14 @@ if [[ "$AUTO" == "1" ]]; then
     exit 1
   fi
 
-  # Auto mode always uses a tag/publish flow for complete release automation.
-  PUBLISH=1
-
-  if ! command -v git >/dev/null 2>&1; then
-    echo "Warning: git is not available; commit/tag steps will be skipped."
+  # Auto implies a full release; --dry-run simulates it without publishing or touching git.
+  if [[ "$DRY_RUN" != "1" ]]; then
+    PUBLISH=1
   fi
 
-  if [[ "$PUBLISH" == "1" ]]; then
-    if ! command -v npm >/dev/null 2>&1; then
-      echo "npm is required for publish flow."
-      exit 1
-    fi
+  if ! command -v npm >/dev/null 2>&1; then
+    echo "npm is required for the release flow."
+    exit 1
   fi
 
   if [[ ${#NOTES[@]} -eq 0 ]]; then
@@ -166,7 +164,14 @@ if [[ "$AUTO" == "1" ]]; then
 
   run_changelog "$NEW_VERSION"
 
-  if [[ "$PUBLISH" == "1" && -z "${NODE_AUTH_TOKEN:-}" ]]; then
+  if [[ "$DRY_RUN" == "1" ]]; then
+    echo "Auto dry-run: simulating release for ${NEW_VERSION} (no commit/tag/publish)."
+    npm publish --dry-run --access public
+    echo "Auto release dry run completed for ${NEW_VERSION}."
+    exit 0
+  fi
+
+  if [[ -z "${NODE_AUTH_TOKEN:-}" ]]; then
     echo "Warning: NODE_AUTH_TOKEN is not set. npm may still use other auth mechanisms."
   fi
 
@@ -204,4 +209,5 @@ echo "Release check complete."
 echo "Use --publish to publish to npm or --dry-run to test the publish command."
 echo "Add --check to run pack validation only."
 echo "Add --auto to run bump + changelog + commit + tag + publish in one step."
+echo "Use --auto --dry-run to simulate the full auto flow without publishing."
 echo "Use --note \"...\" when bumping to record changelog entries."

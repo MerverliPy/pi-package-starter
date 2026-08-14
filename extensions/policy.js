@@ -24,9 +24,16 @@ const SAFE_BASH_PATTERNS = [
   /^find\s+[A-Za-z0-9_./-]+\s+(?:-maxdepth|-[mp]ath|-[nt])?.*$/,
   /^rg\s+.+$/,
   /^grep\s+.+$/,
-  /^git\s+(status|log|show|branch|checkout|add|restore|stash|fetch|pull|push|clone|commit|merge|rebase|tag|rev-parse|ls-files|ls-tree|reset)(\s+.+)?$/,
-  /^npm\s+(test|run|ci|ls|help)(\s+.+)?$/,
-  /^node\s+.+$/,
+  /^git\s+(status|log|show|branch|rev-parse|ls-files|ls-tree)(\s+.+)?$/,
+  /^npm\s+(ls|help)(\s+.+)?$/,
+  /^node(\s+(-v|--version))?$/,
+];
+
+// Side-effectful or arbitrary-code commands: allowed only after explicit confirmation.
+const CONFIRM_BASH_PATTERNS = [
+  /^node\b/,
+  /^npm\s+(test|run|ci|install|i|add|exec|x)\b/,
+  /^git\s+(checkout|add|restore|stash|fetch|pull|push|clone|commit|merge|rebase|tag|reset)\b/,
 ];
 
 const GIT_DIFF_ALLOWED_OPTIONS = new Set([
@@ -140,10 +147,17 @@ export function evaluateBashCommand(command) {
     return { decision: "allow" };
   }
 
+  if (CONFIRM_BASH_PATTERNS.some((pattern) => pattern.test(trimmed))) {
+    return {
+      decision: "confirm",
+      reason: "Command executes arbitrary code or has side effects; confirm to continue.",
+    };
+  }
+
   return {
     decision: "confirm",
     reason: "Command is not in the strict allowlist.",
   };
 }
 
-export { GIT_DIFF_ALLOWED_OPTIONS, FORCE_BLOCK_PATTERNS, SAFE_BASH_PATTERNS, isGitDiffCommandSafe, hasControlCharacters, isSafePath, isRevisionLike, tokenizeSimple };
+export { CONFIRM_BASH_PATTERNS, GIT_DIFF_ALLOWED_OPTIONS, FORCE_BLOCK_PATTERNS, SAFE_BASH_PATTERNS, isGitDiffCommandSafe, hasControlCharacters, isSafePath, isRevisionLike, tokenizeSimple };

@@ -13,6 +13,20 @@ const TABLE = [
   { label: "unsafe git diff path", command: "git diff HEAD~1 HEAD -- ../../../../etc/passwd", decision: "confirm" },
   { label: "blocked redirection", command: "cat > secrets.txt", decision: "block" },
   { label: "confirm unknown command", command: "python -c \"print('x')\"", decision: "confirm" },
+  { label: "node version allow", command: "node --version", decision: "allow" },
+  { label: "node -v allow", command: "node -v", decision: "allow" },
+  { label: "node -e confirm", command: "node -e \"process.exit(0)\"", decision: "confirm" },
+  { label: "node script confirm", command: "node server.js", decision: "confirm" },
+  { label: "npm ls allow", command: "npm ls", decision: "allow" },
+  { label: "npm help allow", command: "npm help install", decision: "allow" },
+  { label: "npm test confirm", command: "npm test", decision: "confirm" },
+  { label: "npm run confirm", command: "npm run build", decision: "confirm" },
+  { label: "npm install confirm", command: "npm install express", decision: "confirm" },
+  { label: "git status allow", command: "git status --porcelain", decision: "allow" },
+  { label: "git log allow", command: "git log --oneline -5", decision: "allow" },
+  { label: "git push confirm", command: "git push origin main", decision: "confirm" },
+  { label: "git reset confirm", command: "git reset --hard HEAD~1", decision: "confirm" },
+  { label: "git commit confirm", command: "git commit -m \"x\"", decision: "confirm" },
 ];
 
 for (const test of TABLE) {
