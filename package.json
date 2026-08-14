@@ -1,0 +1,45 @@
+{
+  "name": "my-pi-package",
+  "version": "0.2.0",
+  "description": "Starter Pi package with extension, skill, prompt template, and theme",
+  "private": false,
+  "keywords": ["pi-package", "pi", "coding-agent"],
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "validate": "node ./scripts/validate.mjs",
+    "changelog:add": "node ./scripts/changelog.mjs",
+    "release:check": "bash ./scripts/release.sh --check",
+    "release:dry": "bash ./scripts/release.sh --dry-run",
+    "release:auto": "bash ./scripts/release.sh --auto",
+    "release": "bash ./scripts/release.sh --publish",
+    "test": "node ./scripts/policy.test.mjs && node ./scripts/release.test.mjs"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "dependencies": {
+    "typebox": "^0.34.0"
+  },
+  "pi": {
+    "extensions": ["./extensions"],
+    "skills": ["./skills"],
+    "prompts": ["./prompts"],
+    "themes": ["./themes"]
+  },
+  "files": [
+    "extensions",
+    "skills",
+    "prompts",
+    "themes",
+    "README.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
