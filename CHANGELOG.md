@@ -2,18 +2,16 @@
 
 ## Unreleased
 
-- Review fixes (v2.1.1):
-  - `--auto --dry-run` no longer publishes; it simulates bump + changelog + dry publish without commit/tag/publish.
-  - Tightened bash policy: `node` / `npm test|run|ci|install` / mutating `git` commands now require confirmation.
-  - Added edge-mode tests for `--auto --dry-run`, `--auto` without version, and node/npm/git policy decisions.
-
-- Executed v2.1 polish pass:
-  - Added policy evaluator extraction with shared `extensions/policy.js` module.
-  - Added test coverage for command policy decisions and release script behavior.
-  - Added skill frontmatter linting in package validation.
-  - Made package version in `/pkg-version` and tool output dynamic from `package.json`.
-
-- Initial scaffold with Pi extension, skill, prompt template, and theme.
+- Rebranded the package as **Pi Smithy** (`pi-smithy`):
+  - New package identity: name, description, and keywords.
+  - Theme renamed to `smithy-cyan`.
+  - Extension output strings now read the package name/version from `package.json` (no hardcoded names).
+- Reworked user-facing docs for clarity and visual appeal:
+  - README: badge row, feature table, table of contents, command reference table, and a "Forge your own package" quickstart.
+  - CONTRIBUTING: now the single source of truth for the release workflow.
+  - SECURITY: clearer structure and a full policy summary.
+  - CHANGELOG: removed internal review notes from the Unreleased section.
+- Removed personal content from docs (local absolute paths, personal email in git history).
 
 ## [0.2.2] - 2026-08-14
 

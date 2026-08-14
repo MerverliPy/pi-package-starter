@@ -17,11 +17,14 @@ If you discover a security issue, please report it responsibly:
 
 Please do not share sensitive exploit details publicly.
 
-## Hardening notes for this starter
+## Hardening notes
 
-- Extensions are loaded with your user permissions in Pi.
-- Review package code before installing.
-- The sample extension uses a strict bash command allowlist with:
-  - hard-blocked destructive patterns (e.g. `rm -rf`, `sudo`, `chmod 777`)
-  - confirm-required side-effectful commands (`node <script>`, `npm test/run/ci/install`, mutating `git` commands)
-  - explicit `git diff` allowlist when used.
+Extensions are loaded with your user permissions in Pi — review package code before installing.
+
+This package's sample extension enforces a strict bash command policy:
+
+- **Hard-blocked** destructive patterns: `rm -rf`, `sudo`, `chmod 777`, `dd`, `mkfs`, `su`, `nohup`, `chown`, `kill`, `ssh`, and shell injection constructs (backticks, `$(...)`, `&&`, `||`, redirection).
+- **Confirm-required** side-effectful commands: `node <script>`, `npm test/run/ci/install`, and mutating `git` commands.
+- **Allowlisted** safe commands, including an explicit `git diff` allowlist.
+
+See `extensions/policy.js` for the full evaluator.

@@ -1,7 +1,7 @@
 {
-  "name": "my-pi-package",
+  "name": "pi-smithy",
   "version": "0.2.2",
-  "description": "Starter Pi package with extension, skill, prompt template, and theme",
+  "description": "A workshop for crafting Pi packages — extension, skill, prompt template, theme, and release tooling from one scaffold.",
   "repository": {
     "type": "git",
     "url": "https://github.com/MerverliPy/pi-package-starter.git"
@@ -14,7 +14,13 @@
   "keywords": [
     "pi-package",
     "pi",
-    "coding-agent"
+    "coding-agent",
+    "starter",
+    "scaffold",
+    "extension",
+    "skill",
+    "theme",
+    "prompt"
   ],
   "type": "module",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
 	"$schema": "https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
-	"name": "starter-cyan",
+	"name": "smithy-cyan",
 	"vars": {
 		"teal": "#2d9ea5",
 		"blue": "#3f76b8",

@@ -19,6 +19,20 @@ function getPackageVersion(): string {
   return "0.0.0";
 }
 
+function getPackageName(): string {
+  try {
+    const packagePath = fileURLToPath(new URL("../package.json", import.meta.url));
+    const packageRaw = readFileSync(packagePath, "utf8");
+    const packageJson = JSON.parse(packageRaw);
+    if (typeof packageJson.name === "string" && packageJson.name.trim()) {
+      return packageJson.name;
+    }
+  } catch {
+    // Keep fallback for non-standard packaging layouts.
+  }
+  return "pi-smithy";
+}
+
 export default function (pi: ExtensionAPI) {
   const now = () => new Date().toISOString();
 
@@ -33,7 +47,7 @@ export default function (pi: ExtensionAPI) {
   pi.registerCommand("pkg-version", {
     description: "Show package version",
     handler: (_args, ctx) => {
-      ctx.ui.notify(`pi-package-starter version: ${getPackageVersion()}`, "info");
+      ctx.ui.notify(`${getPackageName()} version: ${getPackageVersion()}`, "info");
     },
   });
 
@@ -47,12 +61,12 @@ export default function (pi: ExtensionAPI) {
     async execute(_toolCallId, params) {
       const extra = params.message?.trim();
       const text = extra
-        ? `[pi-package-starter] ${now()}: ${extra}`
-        : `[pi-package-starter] ${now()}`;
+        ? `[${getPackageName()}] ${now()}: ${extra}`
+        : `[${getPackageName()}] ${now()}`;
 
       return {
         content: [{ type: "text", text }],
-        details: { source: "pi-package-starter", message: extra ?? "", version: getPackageVersion() },
+        details: { source: getPackageName(), message: extra ?? "", version: getPackageVersion() },
       };
     },
   });
@@ -77,7 +91,7 @@ export default function (pi: ExtensionAPI) {
         if (!allow) {
           return {
             block: true,
-            reason: `Blocked by pi-package-starter policy. ${decision.reason}`,
+            reason: `Blocked by ${getPackageName()} policy. ${decision.reason}`,
           };
         }
       }

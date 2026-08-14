@@ -9,7 +9,7 @@ const requiredFiles = [
   "skills/quick-audit/references/checklist.md",
   "skills/quick-audit/references/security-notes.md",
   "prompts/review-with-lens.md",
-  "themes/starter-cyan.json",
+  "themes/smithy-cyan.json",
   "scripts/release.sh",
   "scripts/validate.mjs",
   "scripts/changelog.mjs",
