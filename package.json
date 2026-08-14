@@ -1,7 +1,15 @@
 {
   "name": "my-pi-package",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Starter Pi package with extension, skill, prompt template, and theme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MerverliPy/pi-package-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MerverliPy/pi-package-starter/issues"
+  },
+  "homepage": "https://github.com/MerverliPy/pi-package-starter#readme",
   "private": false,
   "keywords": [
     "pi-package",

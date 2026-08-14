@@ -15,6 +15,10 @@
 
 - Initial scaffold with Pi extension, skill, prompt template, and theme.
 
+## [0.2.2] - 2026-08-14
+
+- Add repository metadata so npm provenance verification passes on GitHub Actions
+
 ## [0.2.1] - 2026-08-14
 
 - Auto dry-run no longer publishes; simulates bump+changelog+dry publish
