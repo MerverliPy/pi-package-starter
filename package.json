@@ -24,7 +24,7 @@
     "typebox": "*"
   },
   "dependencies": {
-    "typebox": "^0.34.0"
+    "typebox": "^1.3.7"
   },
   "pi": {
     "extensions": [
