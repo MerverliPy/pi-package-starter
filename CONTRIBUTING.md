@@ -4,7 +4,7 @@ Thanks for contributing! This package is intentionally small and easy to maintai
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - npm 10+
 
 ## Local setup
