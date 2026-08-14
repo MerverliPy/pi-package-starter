@@ -1,9 +1,13 @@
 {
   "name": "my-pi-package",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Starter Pi package with extension, skill, prompt template, and theme",
   "private": false,
-  "keywords": ["pi-package", "pi", "coding-agent"],
+  "keywords": [
+    "pi-package",
+    "pi",
+    "coding-agent"
+  ],
   "type": "module",
   "license": "MIT",
   "scripts": {
@@ -23,10 +27,18 @@
     "typebox": "^0.34.0"
   },
   "pi": {
-    "extensions": ["./extensions"],
-    "skills": ["./skills"],
-    "prompts": ["./prompts"],
-    "themes": ["./themes"]
+    "extensions": [
+      "./extensions"
+    ],
+    "skills": [
+      "./skills"
+    ],
+    "prompts": [
+      "./prompts"
+    ],
+    "themes": [
+      "./themes"
+    ]
   },
   "files": [
     "extensions",

@@ -15,6 +15,12 @@
 
 - Initial scaffold with Pi extension, skill, prompt template, and theme.
 
+## [0.2.1] - 2026-08-14
+
+- Auto dry-run no longer publishes; simulates bump+changelog+dry publish
+- Tightened bash policy: node, npm test/run/ci/install, and mutating git commands require confirmation
+- Added edge-mode tests for release and policy paths
+
 ## [0.2.0] - 2026-08-14
 
 - Added richer skill references and stricter bash command guardrails
