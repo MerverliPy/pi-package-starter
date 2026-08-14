@@ -8,7 +8,7 @@ A workshop for building [Pi coding-agent](https://github.com/earendil-works/pi) 
 
 [![npm version](https://img.shields.io/npm/v/pi-smithy?color=2d9ea5&label=npm)](https://www.npmjs.com/package/pi-smithy)
 [![License](https://img.shields.io/npm/l/pi-smithy?color=3fa65f)](LICENSE)
-[![CI](https://img.shields.io/github/actions/workflow/status/MerverliPy/pi-package-starter/ci.yml?branch=main&label=CI)](https://github.com/MerverliPy/pi-package-starter/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/MerverliPy/pi-smithy/ci.yml?branch=main&label=CI)](https://github.com/MerverliPy/pi-smithy/actions)
 
 </div>
 

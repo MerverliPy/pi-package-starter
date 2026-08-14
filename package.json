@@ -1,15 +1,15 @@
 {
   "name": "pi-smithy",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A workshop for crafting Pi packages — extension, skill, prompt template, theme, and release tooling from one scaffold.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MerverliPy/pi-package-starter.git"
+    "url": "https://github.com/MerverliPy/pi-smithy.git"
   },
   "bugs": {
-    "url": "https://github.com/MerverliPy/pi-package-starter/issues"
+    "url": "https://github.com/MerverliPy/pi-smithy/issues"
   },
-  "homepage": "https://github.com/MerverliPy/pi-package-starter#readme",
+  "homepage": "https://github.com/MerverliPy/pi-smithy#readme",
   "private": false,
   "keywords": [
     "pi-package",

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [0.3.0] - 2026-08-14
 
 - Rebranded the package as **Pi Smithy** (`pi-smithy`):
   - New package identity: name, description, and keywords.
@@ -12,6 +12,8 @@
   - SECURITY: clearer structure and a full policy summary.
   - CHANGELOG: removed internal review notes from the Unreleased section.
 - Removed personal content from docs (local absolute paths, personal email in git history).
+- Renamed the GitHub repository to `MerverliPy/pi-smithy` and updated all URLs.
+- First npm release as `pi-smithy`; the previous `my-pi-package` releases are deprecated.
 
 ## [0.2.2] - 2026-08-14
 
