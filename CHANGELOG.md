@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.2] - 2026-08-15
+
+- **Fix: shipped tarball.** Version 0.3.1 published with the pre-patch `policy.js` because the release flow did not stage `extensions/`/`scripts/`/docs. This release ships the hardened bash gate and expanded tests that were previously missing.
+- Hardened bash gate: pipe-to-interpreter blocking, `;`/`|` chaining, `rm` flag variants (`-fr`, subshell/brace wraps), `find -delete/-exec/-execdir/-ok/-okdir`, and `xargs`.
+- Anchored the destructive-command blocklist to the leading command token (removes `dd`/`kill`/`su`/`ssh` false positives from searches).
+- Allowlisted repo-constitution ceremony commands (`bash scripts/plan-lock.sh verify|status|propose`, `verify-env.sh`, `run-all-checks.sh`); `plan-lock.sh init`/`approve` remain human-only.
+- Documented policy scope/limitations in SECURITY.md (bash-tool-only guardrail).
+
+## [0.3.1] - 2026-08-15
+
+- Bash gate: pipe/chaining/rm/find/xargs bypasses + repo-constitution cmd allowlist + scope docs
+
 ## Unreleased
 
 - Added `benchmark/` — workflow stress benchmark (policy gate, manifest, skills, config, CLI, tooling, concurrency) with performance statistics, bug logging, root-cause debugging, and a generated fix plan.
