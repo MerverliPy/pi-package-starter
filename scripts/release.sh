@@ -108,10 +108,10 @@ create_commit_and_tag() {
     fi
 
     if git status --porcelain --untracked-files=normal | grep -q .; then
-      local changed=(package.json CHANGELOG.md package-lock.json)
+      local changed=(package.json CHANGELOG.md package-lock.json extensions scripts skills prompts themes SECURITY.md README.md CONTRIBUTING.md LICENSE)
       local to_add=()
       for f in "${changed[@]}"; do
-        [[ -f "$f" ]] && to_add+=("$f")
+        [[ -e "$f" ]] && to_add+=("$f")
       done
 
       if [[ ${#to_add[@]} -gt 0 ]]; then
@@ -166,7 +166,7 @@ if [[ "$AUTO" == "1" ]]; then
 
   if [[ "$DRY_RUN" == "1" ]]; then
     echo "Auto dry-run: simulating release for ${NEW_VERSION} (no commit/tag/publish)."
-    npm publish --dry-run --access public
+    npm pack --dry-run
     echo "Auto release dry run completed for ${NEW_VERSION}."
     exit 0
   fi
@@ -191,7 +191,7 @@ if [[ -n "$BUMP" ]]; then
 fi
 
 if [[ "$DRY_RUN" == "1" ]]; then
-  npm publish --dry-run --access public
+  npm pack --dry-run
   echo "Release dry run completed."
   exit 0
 fi

@@ -117,6 +117,29 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, val
 
 ---
 
+## Benchmark
+
+`npm run benchmark` stress-tests the pi workflow end-to-end and reports on it:
+
+- **Policy gate** — regression table, adversarial security oracle (destructive commands must never be auto-allowed), benign allowlist, throughput (evals/sec).
+- **Manifest** — package/pi manifest integrity + `npm pack --dry-run` shipping checks.
+- **Skills** — inventory of every installed skill across all sources, frontmatter contract, broken symlinks, duplicate names.
+- **Config** — settings.json, auth provider shape (no secrets), model store, moshi telemetry, context-mode KB, session dir.
+- **CLI / stress** — real `pi` binary: version latency, `pi list`, `pi --list-models`, 16-way concurrent spawns, output-size handling.
+- **Tooling** — `npm run validate`, `npm test`, `release.sh --check`/`--dry-run` under real execution.
+
+Every check is timed, failures are logged as bugs (`benchmark/reports/bugs.jsonl`, append-only), debugged (classification + root-cause + file forensics), and written to a prioritized fix plan in `benchmark/reports/FIXES.md`.
+
+| Command | What it does |
+|---|---|
+| `npm run benchmark` | Full run (local, no LLM tokens). Exit `0` clean, `1` bugs found |
+| `npm run benchmark:quick` | Local-only checks, skips CLI/stress/tooling |
+| `npm run benchmark:e2e` | Also runs one real agent turn (spends tokens) |
+
+Reports: `benchmark/reports/latest.{json,md}` (overwritten each run) plus a timestamped JSON snapshot.
+
+---
+
 ## License
 
 [MIT](LICENSE)
