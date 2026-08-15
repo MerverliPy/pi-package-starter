@@ -1,6 +1,6 @@
 {
   "name": "pi-smithy",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A workshop for crafting Pi packages — extension, skill, prompt template, theme, and release tooling from one scaffold.",
   "repository": {
     "type": "git",
@@ -31,7 +31,10 @@
     "release:dry": "bash ./scripts/release.sh --dry-run",
     "release:auto": "bash ./scripts/release.sh --auto",
     "release": "bash ./scripts/release.sh --publish",
-    "test": "node ./scripts/policy.test.mjs && node ./scripts/release.test.mjs"
+    "test": "node ./scripts/policy.test.mjs && node ./scripts/release.test.mjs",
+    "benchmark": "node ./benchmark/run.mjs",
+    "benchmark:quick": "node ./benchmark/run.mjs --quick",
+    "benchmark:e2e": "node ./benchmark/run.mjs --e2e"
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
@@ -59,6 +62,7 @@
     "skills",
     "prompts",
     "themes",
+    "scripts",
     "README.md",
     "CHANGELOG.md",
     "CONTRIBUTING.md",

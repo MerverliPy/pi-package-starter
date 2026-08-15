@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- Added `benchmark/` — workflow stress benchmark (policy gate, manifest, skills, config, CLI, tooling, concurrency) with performance statistics, bug logging, root-cause debugging, and a generated fix plan.
+- Fixed bash policy gate: force-block destructive `find` primaries (`-delete`, `-exec`, `-execdir`, `-ok`, `-okdir`) and `xargs` pipe vectors.
+- Fixed release tooling: `--dry-run` / `--auto --dry-run` now use `npm pack --dry-run` (registry-independent) so dry-runs work for already-published versions.
+- Ship `scripts/` in the npm tarball (added to the `files` allowlist).
+
+## [0.3.1] - 2026-08-15
+
+- Bash gate: pipe/chaining/rm/find/xargs
+ bypasses + repo-constitution cmd allowlist + scope docs
+
 ## [0.3.0] - 2026-08-14
 
 - Rebranded the package as **Pi Smithy** (`pi-smithy`):
